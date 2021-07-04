@@ -1,0 +1,12 @@
+﻿  ocv.cpp
+C:\Users\Aurora_Boreas\Desktop\20210703 openCVcourse\20210704Review\ocv.cpp(129,57): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\Aurora_Boreas\Desktop\20210703 openCVcourse\20210704Review\ocv.cpp(129,54): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=int
+          ]
+  20210704Review.vcxproj -> C:\Users\Aurora_Boreas\Desktop\20210703 openCVcourse\20210704Review\x64\Debug\20210704Review.exe
