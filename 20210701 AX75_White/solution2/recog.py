@@ -100,25 +100,27 @@ for c in digitCnts:
 	]
 	on = [0] * len(segments)
 
-# loop over the segments
-for (i, ((xA, yA), (xB, yB))) in enumerate(segments):
-    # extract the segment ROI, count the total number of
-    # thresholded pixels in the segment, and then compute
-    # the area of the segment
-    segROI = roi[yA:yB, xA:xB]
-    total = cv2.countNonZero(segROI)
-    area = (xB - xA) * (yB - yA)
-    # if the total number of non-zero pixels is greater than
-    # 50% of the area, mark the segment as "on"
-    if total / float(area) > 0.5:
-        on[i]= 1
-# lookup the digit and draw it on the image
-digit = DIGITS_LOOKUP[tuple(on)]
-digits.append(digit)
-cv2.rectangle(output, (x, y), (x + w, y + h), (0, 255, 0), 1)
-cv2.putText(output, str(digit), (x - 10, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 255, 0), 2)
+	# loop over the segments
+	for (i, ((xA, yA), (xB, yB))) in enumerate(segments):
+		# extract the segment ROI, count the total number of
+		# thresholded pixels in the segment, and then compute
+		# the area of the segment
+		segROI = roi[yA:yB, xA:xB]
+		total = cv2.countNonZero(segROI)
+		area = (xB - xA) * (yB - yA)
+		# if the total number of non-zero pixels is greater than
+		# 50% of the area, mark the segment as "on"
+		if total / float(area) > 0.5:
+			on[i]= 1
+
+	# lookup the digit and draw it on the image
+	digit = DIGITS_LOOKUP[tuple(on)]
+	digits.append(digit)
+	cv2.rectangle(output, (x, y), (x + w, y + h), (0, 255, 0), 1)
+	cv2.putText(output, str(digit), (x - 10, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 255, 0), 2)
 
 # display the digits
+# print(digits)
 print(u"{}{}.{} \u00b0C".format(*digits))
 cv2.imshow("Input", image)
 cv2.imshow("Output", output)
