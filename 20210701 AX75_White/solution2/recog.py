@@ -30,6 +30,8 @@ image = imutils.resize(image, height=500)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 blurred = cv2.GaussianBlur(gray, (5, 5), 0)
 edged = cv2.Canny(blurred, 50, 200, 255)
+cv2.imshow('canny', edged)
+cv2.waitKey(0)
 
 # find contours in the edge map, then sort them by their
 # size in descending order
@@ -51,13 +53,23 @@ for c in cnts:
 # extract the thermostat display, apply a perspective transform
 # to it
 warped = four_point_transform(gray, displayCnt.reshape(4, 2))
+cv2.imshow('warped', warped)
+cv2.waitKey(0)
+
 output = four_point_transform(image, displayCnt.reshape(4, 2))
+cv2.imshow('output', output)
+cv2.waitKey(0)
 
 # threshold the warped image, then apply a series of morphological
 # operations to cleanup the thresholded image
 thresh = cv2.threshold(warped, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+cv2.imshow('thresh1', thresh)
+cv2.waitKey(0)
+
 kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (1, 5))
 thresh = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel)
+cv2.imshow('thresh2', thresh)
+cv2.waitKey(0)
 
 # find contours in the thresholded image, then initialize the
 # digit contours lists
